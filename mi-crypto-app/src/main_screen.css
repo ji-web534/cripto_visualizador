@@ -1,13 +1,15 @@
 .main-screen {
+    display: flex;
     background-color: #f0f0f0;
     padding: 20px;
     text-align: center;
     font-size: 24px;
     color: #333;
-    height: 40vh; 
+    height: 100vh; 
     display: flex;
     flex-direction: lower;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    width: 100vw;
 }
