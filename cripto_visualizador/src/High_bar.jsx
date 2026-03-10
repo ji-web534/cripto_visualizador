@@ -1,10 +1,15 @@
 import React from 'react'
 import './high_bar.css'
 import { cryptos } from './crypto'
+import { Link } from 'react-router-dom'
 export default function high_bar() {
   return (
-    <div className="high-bar">    <div className="high-bar" >
+   
+    
+      
+        <div className="high-bar" >
         {cryptos.map(crypto => (
+          <Link to={`/crypto/${crypto.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
         <div key={crypto.id} className="crypto_card">
         <img src={crypto.imagen} alt={crypto.nombre} width="30" />
         <div>
@@ -15,10 +20,11 @@ export default function high_bar() {
           <p style={{ color: crypto.cambio_24h >= 0 ? 'green' : 'red' }}>
             {crypto.cambio_24h >= 0 ? '▲' : '▼'} {Math.abs(crypto.cambio_24h)}%
           </p>
+
         </div>
       </div>
+       </Link> 
         ))}
         </div>
-      </div>
   )
 }

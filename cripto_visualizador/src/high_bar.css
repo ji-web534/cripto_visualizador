@@ -1,14 +1,16 @@
 .high-bar {
-    background-color: #333;
+    display: flex;
+    background-color: #af0202;
     color: white;
     padding: 10px;
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction:  row;
    gap: 20px;
-   
-   
+   height: 100vh;
+   width: 10%;
+   flex-direction: column;
 
 }

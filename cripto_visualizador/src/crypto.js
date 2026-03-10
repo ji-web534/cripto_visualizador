@@ -8,7 +8,7 @@ export const cryptos = [
     market_cap: "1.2T",
     volumen_24h: "35.2B",
     imagen: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
-    // Gráfico de tendencia (Verde si sube, Rojo si baja)
+
     grafico: "https://www.coingecko.com/coins/1/sparkline.svg",
     descripcion: "La primera criptomoneda del mundo."
   },
