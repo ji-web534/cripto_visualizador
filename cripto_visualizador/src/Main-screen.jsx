@@ -1,5 +1,5 @@
 import React from 'react'
-import './main_screen.css'
+import './main-screen.css'
 import { cryptos } from './crypto'
 import { useParams } from 'react-router-dom' 
 import { Details_bar } from './Details-bar';
