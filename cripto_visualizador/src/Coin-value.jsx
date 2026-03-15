@@ -7,7 +7,7 @@ export  function Coin_value() {
 const moneda = cryptos.find((c) => Number(c.id) === Number(id));
 
   return (
-    <div className='Coin-value'style={{ color: cryptos. cambio_24h >= 0 ? 'green' : 'red' }}>
+    <div className='Coin-value'style={{ color: moneda. cambio_24h >= 0 ? 'green' : 'red' }}>
        <div >
           <p > precio:${moneda.precio.toLocaleString()}</p>
           </div>

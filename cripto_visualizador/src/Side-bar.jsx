@@ -7,7 +7,7 @@ export default function Side_bar() {
    
     
       
-        <div className="side-bar" >
+        <div className="side-bar"  >
         {cryptos.map(crypto => (
           <Link to={`/crypto/${crypto.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
         <div key={crypto.id} className="crypto-card">

@@ -10,8 +10,13 @@ const moneda = cryptos.find((c) => Number(c.id) === Number(id));
           <img src={moneda.imagen} alt={moneda.nombre} width="60" />
           <div>
             <h3>{moneda.nombre} <span>{moneda.simbolo}</span></h3>
+            
             <p>Volumen 24h: {moneda.volumen_24h}</p>
+              
           </div>
+              <p style={{ color: crypto.cambio_24h >= 0 ? 'green' : 'red' }}>
+            {moneda.cambio_24h >= 0 ? '▲' : '▼'} {Math.abs(moneda.cambio_24h)}%
+          </p> 
         </div> 
     </div>
   )
