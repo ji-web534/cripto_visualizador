@@ -9,7 +9,8 @@ function App() {
 
   return (
     <div className='app-container'>
-     
+   
+
       <Side_bar/> 
     <div className="detalle-container">
         <Routes>

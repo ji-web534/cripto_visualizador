@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { cryptos } from './crypto'
+import { Crypto } from './crypto.jsx'
 import "./details-bar.css"
 export  function Details_bar() {
      const { id } = useParams();
-const moneda = cryptos.find((c) => Number(c.id) === Number(id));
+const moneda =  Crypto.find((c) => Number(c.id) === Number(id));
   return (
     <div>
      <div className="Details-bar">
