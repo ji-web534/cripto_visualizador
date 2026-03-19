@@ -1,7 +1,7 @@
 import React from 'react'
 import"./coin-value.css"
 import { useParams } from 'react-router-dom';
-import { cryptos } from './crypto';
+import { cryptos } from './crypto.jsx';
 export  function Coin_value() {
   const { id } = useParams();
 const moneda = cryptos.find((c) => Number(c.id) === Number(id));

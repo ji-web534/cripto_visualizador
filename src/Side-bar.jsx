@@ -1,6 +1,6 @@
 import React from 'react'
 import './side-bar.css'
-import { cryptos } from './crypto'
+import { cryptos } from './crypto.jsx'
 import { Link } from 'react-router-dom'
 export default function Side_bar() {
   return (

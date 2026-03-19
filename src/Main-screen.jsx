@@ -1,6 +1,6 @@
 import React from 'react'
 import './main-screen.css'
-import { cryptos } from './crypto'
+import { cryptos } from './crypto.jsx'
 import { useParams } from 'react-router-dom' 
 import { Details_bar } from './Details-bar';
 import { Coin_value } from './Coin-value.JSX';
