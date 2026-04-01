@@ -6,8 +6,9 @@ import { Details_bar } from './Details-bar';
 import { Coin_value } from './Coin-value.JSX';
 
 export default function Main_screen() {
+    const { crypto, loading, error } = useCrypto(); 
  const { id } = useParams();
-const moneda = useCrypto.find((c) => Number(c.id) === Number(id));
+const moneda =  crypto.find((c) => Number(c.id) === Number(id));
 
 if (!moneda) {
  return (
