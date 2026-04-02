@@ -2,9 +2,7 @@
   display: flex;
   background-color: #0f0f0f;
   color: white;
-
   text-align: center;
-
   justify-content: center;
   align-items: flex-start;
   flex-direction: row;
@@ -14,6 +12,8 @@
   flex-direction: column;
   position: relative;
   left: 0px;
+  overflow: hidden;
+  padding-top: 300px;
 }
 
 .crypto-card {

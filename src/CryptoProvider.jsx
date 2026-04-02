@@ -11,13 +11,22 @@ export const CryptoProvider = ({ children }) => {
           fetch('http://localhost:4000/market/all')
                .then(res => res.json())
                .then(data => {
-                    setCrypto(data);
+                    const coins = data.map(item => ({
+  id: item.id,
+  name: item.name,
+  image: item.image,
+  current_price: item.current_price,
+cambio_24h: item.price_change_percentage_24h || 0, 
+}));
+                    setCrypto(coins);
                     setLoading(false);
                })
                .catch(err => {
                     setError(err.message);
                     setLoading(false);
                });
+
+
      };
 
      useEffect(() => {
