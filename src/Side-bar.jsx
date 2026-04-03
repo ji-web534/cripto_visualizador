@@ -19,11 +19,7 @@ export default function Side_bar() {
   if (loading) return <div className="side-bar">Cargando criptos...</div>;
   if (error) return <div className="side-bar">Error: {error}</div>;
   console.log("Estructura de la primera cripto:", crypto[0]);
-  return (
-
-
-
-    <div className="side-bar"  >
+  return (<div className="side-bar"  >
       <div class="buscador">
         <input
           type="text"
