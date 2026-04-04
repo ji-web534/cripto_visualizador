@@ -8,11 +8,11 @@
   left: 0;
   top: 0;
   padding: 20px 10px; 
-  gap: 15px;
   overflow-y: auto; 
   overflow-x: hidden;
   align-items: stretch; 
   box-sizing: border-box;
+  width: 30vh;
 }
 
 .side-bar::-webkit-scrollbar {
