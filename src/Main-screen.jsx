@@ -19,24 +19,23 @@ if (!moneda) {
       </div>
     );
   }
-
+    const chart = createChart(container, {
+    layout: { background: { color: '#000' }, textColor: '#ccc' },
+    grid: { vertLines: { visible: false } }, // Quitar líneas verticales
+    crosshair: { mode: 0 }, // Modo imán para seguir el precio
+});
+const fetchHistory = async (coinId) => {
+  const response = await fetch(`http://localhost:4000/market/history/${coinId}`);
+  const data = await response.json();
   return (
      <div className="main-screen">
-      
+
       <div> 
         
         <Details_bar  />
 
         <div >
-          <img className="crypto_chart"
-            src={moneda.grafico} 
-            alt="trend" 
-            style={{ 
-              filter: moneda.cambio_24h > 0 
-                ? 'hue-rotate(80deg) saturate(5)' 
-                : 'hue-rotate(300deg) saturate(5)' 
-            }} 
-          />
+         
         </div>
 
       <Coin_value/>
@@ -45,4 +44,4 @@ if (!moneda) {
     </div>
   )
   
-}
+} }
