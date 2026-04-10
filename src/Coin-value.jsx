@@ -4,8 +4,11 @@ import { useParams } from 'react-router-dom';
 import {useCrypto} from './CryptoProvider.jsx'
 export  function Coin_value() {
   const { id } = useParams();
-const moneda =useCrypto.find((c) => Number(c.id) === Number(id));
-
+  const { crypto } = useCrypto();
+const moneda =crypto.find((c) => Number(c.id) === Number(id));
+if (!moneda) {
+    return <div className="Coin-value">Cargando detalles de la moneda...</div>;
+  }
   return (
     <div className='Coin-value'style={{ color: moneda. cambio_24h >= 0 ? 'green' : 'red' }}>
        <div >

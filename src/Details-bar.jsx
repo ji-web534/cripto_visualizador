@@ -3,22 +3,14 @@ import "./details-bar.css"
 
 import {useCrypto} from './CryptoProvider.jsx'
 
-export  function Details_bar() {
-     const { id } = useParams();
-const moneda =  useCrypto.find((c) => Number(c.id) === Number(id));
-  return (
-    <div>
-     <div className="Details-bar">
-   
-          <img src={moneda.imagen} alt={moneda.nombre} width="60" />
-          <div>
-            <h3>{moneda.nombre} <span>{moneda.simbolo}</span></h3>
-            
-            <p>Volumen 24h: {moneda.volumen_24h}</p>
-              
-          </div>
-       
-        </div> 
-    </div>
-  )
+export function Details_bar({ moneda }) { 
+    // Si moneda no llega (por si acaso), evitamos que explote
+    if (!moneda) return null; 
+
+    return (
+        <div className="details-bar">
+            <h1>{moneda.name}</h1>
+            <p>Precio: {moneda.price_usd}</p>
+        </div>
+    );
 }
