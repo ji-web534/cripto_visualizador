@@ -18,6 +18,7 @@ const { crypto, loading: cryptoLoading } = useCrypto();
 
     // EFECTO para buscar los datos cuando cambia la moneda (el ID)
     useEffect(() => {
+        setChartData([]);
         const fetchHistory = async () => {
             try {
                 setLoadingChart(true);
