@@ -1,7 +1,8 @@
 import React from 'react'
 import './side-bar.css'
 import { useCrypto } from './CryptoProvider.jsx';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { createChart } from 'lightweight-charts';
 export default function Side_bar() {
   const { crypto, loading, error, } = useCrypto();
   //creamos la funcion que se encarga de el camio de color
@@ -20,7 +21,7 @@ export default function Side_bar() {
   if (error) return <div className="side-bar">Error: {error}</div>;
   console.log("Estructura de la primera cripto:", crypto[0]);
   return (<div className="side-bar"  >
-      <div class="buscador">
+      <div className="buscador">
         <input
           type="text"
           class="buscador-input"
