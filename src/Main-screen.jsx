@@ -22,21 +22,33 @@ const { crypto, loading: cryptoLoading } = useCrypto();
         const fetchHistory = async () => {
             try {
                 setLoadingChart(true);
-                const response = await fetch(`http://localhost:4000/market/history/${id}`);
-                const data = await response.json();
-                
-                // Transformamos los datos para la librería
-                const formatted = data.map(item => ({
-                    time: item.fecha, 
-                    value: item.precio 
-                }));
+        const response = await fetch(`http://localhost:4000/market/history/${id}`);
+        
+        // ¡IMPORTANTE! Validar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`Error del servidor: ${response.status}`);
+        }
 
-                setChartData(formatted);
-            } catch (error) {
-                console.error("Error cargando historial:", error);
-            } finally {
-                setLoadingChart(false);
-            }
+        const data = await response.json();
+        
+        // ¡IMPORTANTE! Validar que 'data' sea un array antes de transformarlo
+        if (Array.isArray(data)) {
+            const formatted = data.map(item => ({
+                time: item.fecha, 
+                value: item.precio 
+            }));
+            setChartData(formatted);
+        } else {
+            console.error("Los datos recibidos no son un array:", data);
+            setChartData([]); // Aseguramos que quede vacío si no hay datos válidos
+        }
+
+    } catch (error) {
+        console.error("Error cargando historial:", error);
+        setChartData([]); 
+    } finally {
+        setLoadingChart(false);
+    }
         };
 
         if (id) fetchHistory();
