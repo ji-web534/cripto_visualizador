@@ -11,7 +11,7 @@ export default function CryptoChart({ data }) {
 
         chartContainerRef.current.innerHTML = '';
         // 2. CREACIÓN DEL GRÁFICO
-        const chart = createChart(chartContainerRef.current, {
+        const chart =LightweightCharts.createChart(chartContainerRef.current, {
             width: chartContainerRef.current.clientWidth,
             height: 300,
             layout: {
