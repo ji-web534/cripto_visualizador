@@ -11,7 +11,7 @@ export default function CryptoChart({ data }) {
 
         chartContainerRef.current.innerHTML = '';
         // 2. CREACIÓN DEL GRÁFICO
-        const chart =LightweightCharts.createChart(chartContainerRef.current, {
+        const chart = LightweightCharts.createChart(chartContainerRef.current, {
             width: chartContainerRef.current.clientWidth,
             height: 300,
             layout: {
@@ -47,12 +47,32 @@ export default function CryptoChart({ data }) {
             chart.remove();
         };
     }, [data]); // Se vuelve a ejecutar solo si cambian los datos
+    try {
 
-    return (
-        <div 
-            ref={chartContainerRef} 
-            className="crypto-chart-container" 
-            style={{ position: 'relative', width: '100%' }}
-        />
-    );
+        const areaSeries = chart.addSeries(SeriesType.Area, {
+            lineColor: '#2962ff',
+            topColor: '#2962ff',
+            bottomColor: 'rgba(41, 98, 255, 0.28)',
+            lineWidth: 2,
+        });
+
+        areaSeries.setData(data);
+        chart.timeScale().fitContent();
+
+    } catch (err) {
+        console.error("❌ Error al añadir la serie:", err);
+        console.log("Funciones disponibles en 'chart':", Object.keys(chart));
+    }
+    //  Limpieza
+    return () => {
+        chart.remove();
+    };
+ [data];
+return (
+    <div
+        ref={chartContainerRef}
+        className="crypto-chart-container"
+        style={{ position: 'relative', width: '100%', minHeight: '300px' }}
+    />
+);
 }
