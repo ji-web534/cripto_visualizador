@@ -1,8 +1,8 @@
 import React from 'react'
 import './side-bar.css'
-import { useCrypto } from './components/CryptoProvider.jsx';
 import { Link } from 'react-router-dom';
 import { createChart } from 'lightweight-charts';
+import { useCrypto } from './CryptoProvider.jsx';
 export default function Side_bar() {
   const { crypto, loading, error, } = useCrypto();
   //creamos la funcion que se encarga de el camio de color

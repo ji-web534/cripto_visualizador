@@ -3,7 +3,7 @@ import Main_screen from './components/Main-screen.jsx'
 import { Route, Router, Routes } from 'react-router-dom'
 import './app.css'
 import { Pantalla_inicio } from './components/Pantalla-inicio.jsx'
-import Side_bar from './Side-bar.jsx'
+import Side_bar from './components/Side-bar.jsx'
 function App() {
 
 
