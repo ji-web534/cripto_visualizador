@@ -95,7 +95,7 @@ export default function Main_screen() {
                         {loadingChart ? (
                             <p>Cargando gráfico...</p> 
                         ) : (
-                            <CryptoChart data={chartData} /> 
+                            <CryptoChart data={chartData}   className="crypto-chart-container"/> 
                         )}
                     </div>
                 </div>
