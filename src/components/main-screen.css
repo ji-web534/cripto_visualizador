@@ -17,7 +17,9 @@
         linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 40px 40px;
 }
-.crypto_chart{
-    width: 90vw;
-    
+
+.crypto-chart-containe{
+    min-width:  1000000000000000px;
+    height: 10000000px;
+background-color: aqua;
 }
