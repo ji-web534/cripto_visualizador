@@ -1,47 +1,59 @@
 import React, { useEffect, useRef } from 'react';
-import * as LightweightCharts from 'lightweight-charts';
-import './crypto-chart.css'
+import { createChart } from 'lightweight-charts';
+
 export default function CryptoChart({ data }) {
     const chartContainerRef = useRef();
-    const chartRef = useRef(); // Guardaremos la instancia del gráfico aquí
 
     useEffect(() => {
-        // 1. Evitamos crear el gráfico si no hay contenedor o si no hay datos
         if (!chartContainerRef.current || !data || data.length === 0) return;
 
         chartContainerRef.current.innerHTML = '';
-        // 2. CREACIÓN DEL GRÁFICO
-   const chart = LightweightCharts.createChart(chartContainerRef.current, {
-            width: chartContainerRef.current.clientWidth,
-            height: 300,
-            layout: {
-                background: { color: '#131722' },
-                textColor: '#d1d4dc',
-            },
-        });
 
         try {
-            // La serie se crea AQUÍ ADENTRO usando la constante 'chart'
-            const areaSeries = chart.addAreaSeries({
+            const chart = createChart(chartContainerRef.current, {
+                width: chartContainerRef.current.clientWidth,
+                height: 300,
+                layout: {
+                    background: { color: '#131722' },
+                    textColor: '#d1d4dc',
+                },
+                grid: {
+                    vertLines: { color: '#2f333e' },
+                    horzLines: { color: '#2f333e' },
+                },
+            });
+
+            // --- SOLUCIÓN DEFINITIVA AL TYPEERROR ---
+            // Usamos addSeries con un string 'Area'. 
+            // Si addAreaSeries no aparece, este método genérico lo encuentra.
+            const areaSeries = chart.addSeries('Area', {
                 lineColor: '#2962ff',
                 topColor: '#2962ff',
                 bottomColor: 'rgba(41, 98, 255, 0.28)',
+                lineWidth: 2,
             });
 
-            areaSeries.setData(data);
+            // Aseguramos que los datos estén ordenados por tiempo
+            const sortedData = [...data].sort((a, b) => a.time - b.time);
+            
+            areaSeries.setData(sortedData);
             chart.timeScale().fitContent();
-        } catch (err) {
-            console.error("❌ Error al añadir la serie:", err);
-        }
 
-        return () => chart.remove(); // Limpieza al salir
+            return () => {
+                chart.remove();
+            };
+        } catch (error) {
+            console.error("❌ Error final en el gráfico:", error);
+            // Si esto falla, imprimimos el objeto chart para ver qué tiene dentro
+            console.log("Contenido del objeto chart:", chart);
+        }
     }, [data]);
 
-return (
-    <div
-        ref={chartContainerRef}
-        className="crypto-chart-container"
-        
-    />
-);
+    return (
+        <div 
+            ref={chartContainerRef} 
+            className="crypto-chart-container" 
+            style={{ width: '100%', minHeight: '300px' }}
+        />
+    );
 }
