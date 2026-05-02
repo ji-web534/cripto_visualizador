@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-// Importamos las funciones por separado para que Vite no las pierda
-import { createChart, SeriesType } from 'lightweight-charts';
+import { createChart } from 'lightweight-charts';
 
 export default function CryptoChart({ data }) {
     const chartContainerRef = useRef();
@@ -8,65 +7,69 @@ export default function CryptoChart({ data }) {
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        if (!chartContainerRef.current) return;
+        if (!chartContainerRef.current || !data) return;
 
-        // Si el contenedor no tiene ancho, esperamos un poco
+        // Si el ancho es 0, el DOM aún no terminó de calcular el layout
         if (chartContainerRef.current.clientWidth === 0) {
             const timeoutId = setTimeout(() => setIsReady(prev => !prev), 100);
             return () => clearTimeout(timeoutId);
         }
 
         try {
+            // Limpieza manual total antes de crear
             if (chartRef.current) {
                 chartRef.current.remove();
+                chartRef.current = null;
             }
             chartContainerRef.current.innerHTML = '';
 
-            // 1. Crear el gráfico base
+            // 1. Crear el gráfico
             const chart = createChart(chartContainerRef.current, {
                 width: chartContainerRef.current.clientWidth,
                 height: 300,
-                layout: { background: { color: '#131722' }, textColor: '#d1d4dc' },
+                layout: {
+                    background: { color: '#131722' },
+                    textColor: '#d1d4dc',
+                },
+                grid: {
+                    vertLines: { color: '#2f333e' },
+                    horzLines: { color: '#2f333e' },
+                },
             });
             chartRef.current = chart;
 
-            // 2. LA CLAVE: Usar el método genérico addSeries con el tipo explícito
-            // Esto evita buscar 'addAreaSeries' en el objeto chart
-            const areaSeries = chart.addSeries(SeriesType.Area, {
+            // 2. SOLUCIÓN AL SYNTAX ERROR:
+            // Usamos el nombre de la serie como string. Esto no requiere 'SeriesType'.
+            // Es la forma más compatible con Vite y versiones v4/v5.
+            const areaSeries = chart.addSeries('Area', {
                 lineColor: '#2962ff',
                 topColor: '#2962ff',
                 bottomColor: 'rgba(41, 98, 255, 0.28)',
+                lineWidth: 2,
             });
 
-            // 3. Procesar datos (asegurando que sean los del dashboard de criptos)
-            if (data && data.length > 0) {
-                const seenTimes = new Set();
-                const cleanData = [...data]
-                    .map(item => ({
-                        // Corrección de timestamps para Windows/Vite
-                        time: Number(item.time) > 10000000000 ? Math.floor(Number(item.time) / 1000) : Math.floor(Number(item.time)),
-                        value: parseFloat(item.value)
-                    }))
-                    .filter(item => {
-                        if (isNaN(item.time) || isNaN(item.value) || seenTimes.has(item.time)) return false;
-                        seenTimes.add(item.time);
-                        return true;
-                    })
-                    .sort((a, b) => a.time - b.time);
+            // 3. Procesamiento de datos (Lógica para tu dashboard)
+            const seenTimes = new Set();
+            const cleanData = [...data]
+                .map(item => ({
+                    // Aseguramos segundos para evitar 'Assertion failed'
+                    time: Number(item.time) > 10000000000 ? Math.floor(Number(item.time) / 1000) : Math.floor(Number(item.time)),
+                    value: parseFloat(item.value)
+                }))
+                .filter(item => {
+                    if (isNaN(item.time) || isNaN(item.value) || seenTimes.has(item.time)) return false;
+                    seenTimes.add(item.time);
+                    return true;
+                })
+                .sort((a, b) => a.time - b.time);
 
+            if (cleanData.length > 0) {
                 areaSeries.setData(cleanData);
                 chart.timeScale().fitContent();
             }
 
         } catch (error) {
-            console.error("❌ Error con SeriesType:", error);
-            // Si SeriesType falla por la exportación, usamos el string como último recurso
-            try {
-                const fallbackSeries = chartRef.current.addSeries('Area', { lineColor: '#2962ff' });
-                console.log("Se usó fallback de string con éxito");
-            } catch (e) {
-                console.error("Fallo total de la librería");
-            }
+            console.error("❌ Error definitivo en el gráfico:", error);
         }
 
         return () => {
@@ -80,7 +83,13 @@ export default function CryptoChart({ data }) {
     return (
         <div 
             ref={chartContainerRef} 
-            style={{ width: '100%', height: '300px', backgroundColor: '#131722' }} 
+            style={{ 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#131722',
+                borderRadius: '8px',
+                overflow: 'hidden'
+            }} 
         />
     );
 }
