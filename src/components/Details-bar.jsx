@@ -7,7 +7,7 @@ export function Details_bar({ moneda }) {
     return (
         <div className="Details-bar">
             <h1>{moneda.name}</h1>
-            <p>Precio: {moneda.precio}</p>
+            <p>Precio: {moneda.current_price} </p>
         </div>
     );
 }
