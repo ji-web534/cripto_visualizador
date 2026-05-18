@@ -32,7 +32,7 @@ export default function Side_bar() {
         <Link key={item.id} to={`/crypto/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
           <div className="crypto-card">
             <img src={item.image} alt={item.name} width="30" />
-            <div className=''>
+            <div >
 
               <h3>{item.name} ({item.symbol})</h3>
               <p>Precio: ${item.current_price?.toLocaleString()}</p>
