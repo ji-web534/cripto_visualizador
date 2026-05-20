@@ -19,7 +19,9 @@ if (!moneda) {
             {moneda.cambio_24h}% en las últimas 24hs
           </p>
         
-
+          <p >
+            "hola"
+          </p>
    
         <div >
           <p  > {moneda.descripcion}</p>

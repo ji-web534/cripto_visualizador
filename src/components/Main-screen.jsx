@@ -100,7 +100,8 @@ export default function Main_screen() {
                     </div>
                 </div>
 
-                <Coin_value moneda={moneda}/>
+          
+                
             </div>
         </div>
     )
