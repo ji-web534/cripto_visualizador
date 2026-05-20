@@ -23,6 +23,7 @@ export function Details_bar({ moneda }) {
             <div className="porcentaje-caja" style={{ color: colorEstilo }}>
                 <span className="flecha">{esPositivo ? '▲' : '▼'}</span>
                 <span className="numero">{Math.abs(porcentajeCambio).toFixed(2)}%</span>
+                
             </div>
         </div>
     );
