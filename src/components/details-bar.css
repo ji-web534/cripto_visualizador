@@ -1,15 +1,43 @@
 .Details-bar {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important; 
+    justify-content: space-between; /* Separa el título a la izquierda y los precios a la derecha */
+    align-items: center; /* Centrado vertical perfecto de todos los elementos */
+    
     z-index: 1000;
-      flex-direction: column;
     width: 100%; 
     height: 70px; 
     background-color: #0f0f0f;
-    align-items: center;
+    
     position: fixed;  
     top: 0;            
-    left: 10; 
-    border-bottom: 1px solid #333; 
-    padding: 0 20px; 
+    left: 0; 
+    
+    border-bottom: 1px solid #232733; 
+    padding: 0 30px; 
     box-sizing: border-box; 
+}
+
+/* Forzamos a que el h1 no tenga márgenes raros que lo desalineen */
+.Details-bar h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+/* Agrupamos el bloque de precio y porcentaje para controlarlo a la derecha */
+.Details-bar-precios {
+    display: flex;
+    flex-direction: column; /* El precio arriba y el porcentaje abajo, bien prolijos */
+    align-items: flex-end; /* Alineados a la derecha */
+    justify-content: center;
+    gap: 2px;
+}
+
+.Details-bar p {
+    margin: 0; /* Quitamos el margen por defecto de los <p> que rompe el centrado */
+    color: #ffffff;
+    font-size: 16px;
 }

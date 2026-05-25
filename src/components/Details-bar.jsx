@@ -12,20 +12,24 @@ export function Details_bar({ moneda }) {
     const colorEstilo = esPositivo ? '#4caf50' : '#ff5252'; 
 
     return (
-        <div className="Details-bar">
-            <div className="info-principal">
-                <h1>{moneda.name}</h1>
-                <p className="precio-texto">
-                    Precio: <span>USD {parseFloat(moneda.current_price).toLocaleString()}</span>
-                </p>
-            </div>
-
-            <div className="porcentaje-caja" style={{ color: colorEstilo }}>
-                <span className="flecha">{esPositivo ? '▲' : '▼'}</span>
-                <span className="numero">{Math.abs(porcentajeCambio).toFixed(2)}%</span>
-                
-            </div>
+  
+    <div className="Details-bar">
+        {/* LADO IZQUIERDO: Nombre de la moneda */}
+        <h1>{moneda.name}</h1>
+        
+        {/* LADO DERECHO: Precios y porcentaje agrupados */}
+        <div className="Details-bar-precios">
+            <p>Precio: USD {parseFloat(moneda.current_price || moneda.precio).toLocaleString()}</p>
+            <p style={{ 
+                color: (moneda.cambio_24h || moneda.price_change_percentage_24h) >= 0 ? '#4caf50' : '#ff5252',
+                fontSize: '14px',
+                fontWeight: 'bold'
+            }}>
+                {(moneda.cambio_24h || moneda.price_change_percentage_24h) >= 0 ? '▲' : '▼'} 
+                {Math.abs(moneda.cambio_24h || moneda.price_change_percentage_24h || 0).toFixed(2)}%
+            </p>
         </div>
-    );
+    </div>
+);
 }
 
