@@ -17,7 +17,7 @@ export function Details_bar({ moneda }) {
         {/* LADO IZQUIERDO: Nombre de la moneda */}
         <h1>{moneda.name}</h1>
         
-        {/* LADO DERECHO: Precios y porcentaje agrupados */}
+        
         <div className="Details-bar-precios">
             <p>Precio: USD {parseFloat(moneda.current_price || moneda.precio).toLocaleString()}</p>
             <p style={{ 
