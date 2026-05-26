@@ -1,43 +1,23 @@
 .Details-bar {
-    display: flex !important;
-    flex-direction: row !important; 
-    justify-content: space-between; /* Separa el título a la izquierda y los precios a la derecha */
-    align-items: center; /* Centrado vertical perfecto de todos los elementos */
-    
+display: flex;
     z-index: 1000;
-    width: 100%; 
-    height: 70px; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    
     background-color: #0f0f0f;
+    height: 70px;
     
     position: fixed;  
     top: 0;            
-    left: 0; 
     
-    border-bottom: 1px solid #232733; 
-    padding: 0 30px; 
-    box-sizing: border-box; 
-}
+    /* --- AQUÍ ESTÁ EL ARREGLO --- */
+    left: 230px; /* 1. Empieza justo después del sidebar (Cambia 250px por el ancho de tu sidebar) */
+    width: calc(100% - 230px); /* 2. Ocupa el 100% de la pantalla MENOS el ancho del sidebar */
+    /* ---------------------------- */
+  
+    border-bottom: 1px solid #333;
+    padding: 0 20px;
+    box-sizing: border-box;
+} 
 
-/* Forzamos a que el h1 no tenga márgenes raros que lo desalineen */
-.Details-bar h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-}
-
-/* Agrupamos el bloque de precio y porcentaje para controlarlo a la derecha */
-.Details-bar-precios {
-    display: flex;
-    flex-direction: column; /* El precio arriba y el porcentaje abajo, bien prolijos */
-    align-items: flex-end; /* Alineados a la derecha */
-    justify-content: center;
-    gap: 2px;
-}
-
-.Details-bar p {
-    margin: 0; /* Quitamos el margen por defecto de los <p> que rompe el centrado */
-    color: #ffffff;
-    font-size: 16px;
-}

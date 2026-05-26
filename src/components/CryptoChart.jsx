@@ -74,8 +74,8 @@ export default function CryptoChart({ data }) {
         <div 
             ref={chartContainerRef} 
             style={{ 
-           width: '90vw',      
-                height: '100%', 
+           width: '100vw',      
+                height: '100hw', 
            
         }}
         />
