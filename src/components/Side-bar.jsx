@@ -20,33 +20,49 @@ export default function Side_bar() {
   if (loading) return <div className="side-bar">Cargando criptos...</div>;
   if (error) return <div className="side-bar">Error: {error}</div>;
 
-  return (<div className="side-bar"  >
-      <div className="buscador">
-        <input
-          type="text"
-          className="buscador-input"
-          placeholder="Buscar moneda..."
-        />
-      </div>
-      {crypto.map(item => (
-        <Link key={item.id} to={`/crypto/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
-          <div className="crypto-card">
-            <img src={item.image} alt={item.name} width="30" />
-            <div >
-
-              <h3>{item.name} ({item.symbol})</h3>
-              <p>Precio: ${item.current_price?.toLocaleString()}</p>
-
-
-
-              <p style={{ color: definirColor24h(item.cambio_24h) }}>
-                {item.cryptocambio_24h >= 0 ? '▲' : '▼'} {Math.abs(item.cambio_24h).toFixed(2)}%
-              </p>
-
+  return 
+<div className="side-bar">
+            {/* Contenedor del Buscador */}
+            <div className="buscador">
+                <input
+                    type="text"
+                    className="buscador-input"
+                    placeholder="Buscar moneda..."
+                    value={busqueda}
+                    // Cada vez que el usuario escribe, se actualiza la const 'busqueda'
+                    onChange={(e) => setBusqueda(e.target.value)} 
+                />
             </div>
-          </div>
-        </Link>
-      ))}
-    </div>
-  )
+
+            {/* Contenedor de la lista: mapeamos el array ya filtrado */}
+            <div className="crypto-lista">
+                {cryptosFiltradas.map(item => (
+                    <Link 
+                        key={item.id} 
+                        to={`/crypto/${item.id}`} 
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                        <div className="crypto-card">
+                            <img src={item.image} alt={item.name} width="30" height="30" />
+                            <div className="crypto-card-info">
+                                <h3>{item.name} <span className="simbolo">({item.symbol.toUpperCase()})</span></h3>
+                                <p className="precio">Precio: ${item.current_price?.toLocaleString()}</p>
+                                <p 
+                                    className="porcentaje" 
+                                    style={{ color: definirColor24h(item.cambio_24h) }}
+                                >
+                                    {item.cambio_24h >= 0 ? '▲' : '▼'} {Math.abs(item.cambio_24h || 0).toFixed(2)}%
+                                </p>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+
+                {/* Mensaje de respaldo por si no encuentra ninguna moneda */}
+                {cryptosFiltradas.length === 0 && (
+                    <p className="no-resultados">No se encontraron criptomonedas.</p>
+                )}
+            </div>
+        </div>
+    
 }
