@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function search_cryptos({ listaDeCriptos, alSeleccionarMoneda }) {
+export function Search_cryptos({ listaDeCriptos, alSeleccionarMoneda }) {
    
     const [busqueda, setBusqueda] = useState("");
 
