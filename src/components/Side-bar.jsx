@@ -52,7 +52,12 @@ export default function Side_bar() {
             <div className="crypto-card">
               <img src={item.image} alt={item.name} width="30" height="30" />
               <div className="crypto-card-info">
-                <h3>{item.name} <span className="simbolo">({item.symbol.toUpperCase()})</span></h3>
+               <h3>
+  {item.name} 
+  <span className="simbolo">
+    ({(item.symbol || '').toUpperCase()})
+  </span>
+</h3>
                 <p className="precio">Precio: ${item.current_price?.toLocaleString()}</p>
                 <p 
                   className="porcentaje" 
