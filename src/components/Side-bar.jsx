@@ -46,7 +46,7 @@ export default function Side_bar() {
         {cryptosFiltradas.map(item => (
           <Link 
             key={item.id} 
-            to={`/crypto/${item.id}`} 
+            to={`/crypto/${item.id} `} 
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <div className="crypto-card">
@@ -54,9 +54,7 @@ export default function Side_bar() {
               <div className="crypto-card-info">
                <h3>
   {item.name} 
-  <span className="simbolo">
-    ({(item.symbol || '').toUpperCase()})
-  </span>
+
 </h3>
                 <p className="precio">Precio: ${item.current_price?.toLocaleString()}</p>
                 <p 
